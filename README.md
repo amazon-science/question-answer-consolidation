@@ -1,19 +1,29 @@
-## My Project
-This is the reproducibility package for the following paper.
+# Answer Consolidation
 
-TODO: Fill this README out!
+Code for NAACL 2022 paper Answer Consolidation: Formulation and Benchmarking.
 
-Be sure to:
+## Requirements
+* [PyTorch](http://pytorch.org/)
+* [Transformers](https://github.com/huggingface/transformers)
+* wandb
+* tqdm
+* scikit-learn
 
-* Change the title in this README
-* Edit your repository description on GitHub
+## Training from Scratch
 
-## Security
+Finetune the sentence embedding models with the following command:
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+```bash
+>> python main.py --model_name_or_path $MODEL --format sentence_embedding
+```
+where $MODEL can be ``['roberta-large', 'sentence-transformers/all-roberta-large-v1', 'princeton-nlp/sup-simcse-roberta-large']``.
 
-## License Summary
+Finetune the NLI models with the following command:
 
-The documentation is made available under the Creative Commons Attribution-ShareAlike 4.0 International License. See the LICENSE file.
+```bash
+>> python main.py --model_name_or_path $MODEL --format nli
+```
 
-The sample code within this documentation is made available under the MIT-0 license. See the LICENSE-SAMPLECODE file.
+where $MODEL can be ``['roberta-large', 'roberta-large-mnli']``.
+
+Evaluation results on the development and test sets are synced to the wandb darshboard every epoch.
